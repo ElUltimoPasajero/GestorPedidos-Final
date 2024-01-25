@@ -9,6 +9,8 @@ module com.example.gestorpedidoshibernate {
     requires java.naming;
     requires java.sql;
     requires javafx.fxml;
+    requires jasperreports;
+    requires java.desktop;
 
 
     opens com.example.gestorpedidoshibernate to javafx.fxml;

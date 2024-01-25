@@ -35,9 +35,9 @@
       </TableView>
    </center>
    <bottom>
-      <FlowPane fx:id="back" alignment="CENTER" prefHeight="70.0" prefWidth="682.0" BorderPane.alignment="CENTER">
+      <FlowPane fx:id="back" alignment="CENTER" prefHeight="70.0" prefWidth="378.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnBack" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#back" prefHeight="45.0" prefWidth="555.0" style="-fx-background-color: #1a1a1a;" text="Back" textFill="#9b2aa8" underline="true">
+            <Button fx:id="btnBack" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#back" prefHeight="45.0" prefWidth="504.0" style="-fx-background-color: #1a1a1a;" text="Back" textFill="#9b2aa8" underline="true">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
@@ -52,12 +52,17 @@
                   <Bloom threshold="0.14" />
                </effect>
             </Button>
-            <ImageView fitHeight="44.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="btnSaveInvoice" mnemonicParsing="false" onAction="#saveInvoice" prefHeight="38.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #d4c5d9, #773091);" text="Save Invoice" textFill="#2c232a">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="44.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/fire.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnDeleteOrder" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #d4c5d9, #773091);" text="Delete Order" textFill="#c43da3">
+            <Button fx:id="btnDeleteOrder1" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: linear-gradient(from 25px 25px to 100px 100px, #d4c5d9, #773091);" text="Delete Order" textFill="#c43da3">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

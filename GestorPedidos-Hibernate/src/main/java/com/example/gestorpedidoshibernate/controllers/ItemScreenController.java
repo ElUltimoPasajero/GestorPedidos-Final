@@ -20,11 +20,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRFrame;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import net.sf.jasperreports.swing.JRViewer;
+import javax.swing.*;
+
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -55,13 +69,15 @@ public class ItemScreenController implements Initializable {
 
     Double totalPrice = 0.0;
     @FXML
-    private Button btnDeleteOrder;
-    @FXML
     private Button btnDeleteGame;
     @FXML
     private Spinner spinnerGamesCuantt;
     @FXML
     private TableColumn <Item, Integer>columnAmmount;
+    @FXML
+    private Button btnSaveInvoice;
+    @FXML
+    private Button btnDeleteOrder1;
 
 
     @Override
@@ -273,6 +289,42 @@ public class ItemScreenController implements Initializable {
 
             }
         }
+    }
+
+    @FXML
+    public void saveInvoice(ActionEvent actionEvent) throws JRException, SQLException {
+
+        String codigo_pedido = Session.getCurrentOrder().getCode();
+
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/pedidos", "root", "");
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        hashMap.put("cod_pedido", codigo_pedido);
+
+
+        var jasperPrint = JasperFillManager.fillReport("MisPedidosJasper.jasper",hashMap,connection);
+
+
+
+        JRViewer viewer = new JRViewer(jasperPrint);
+
+        JFrame frame = new JFrame("Listado de Juegos");
+        frame.getContentPane().add(viewer);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.pack();
+        frame.setVisible(true);
+
+        System.out.print("Done!");
+
+        JRPdfExporter exp = new JRPdfExporter();
+        exp.setExporterInput(new SimpleExporterInput(jasperPrint));
+        exp.setExporterOutput(new SimpleOutputStreamExporterOutput("juegos.pdf"));
+        exp.setConfiguration(new SimplePdfExporterConfiguration());
+        exp.exportReport();
+
+        System.out.print("Done!");
+
     }
 }
 
